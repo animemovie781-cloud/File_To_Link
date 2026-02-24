@@ -67,11 +67,11 @@
     },
     "CHANNEL": {
       "description": "Public updates channel URL",
-      "value": "https://t.me/AV_BOTz_UPDATE"
+      "value": "https://t.me/littlekanja"
     },
     "SUPPORT": {
       "description": "Support group URL",
-      "value": "https://t.me/AV_SUPPORT_GROUP"
+      "value": "https://t.me/streaming_link"
     },
     "DATABASE_URI": {
       "description": "MongoDB Connection URI",
