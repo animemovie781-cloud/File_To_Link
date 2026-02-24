@@ -164,7 +164,7 @@ class script(object):
     ABOUT_TXT = """<b>╔══❰ {} ❱═════❍
 ║╭━━━━━━━━━━━━━━━━━━➣
 ║┣⪼🤖 ᴍʏ ɴᴀᴍᴇ : {}
-║┣⪼👦 ᴅᴇᴠᴇʟᴏᴘᴇʀ : <a href='https://t.me/RTP_kanha'>ᴀᴠ ᴄʜᴀᴛ ᴏᴡɴᴇʀ</a>
+║┣⪼👦 ᴅᴇᴠᴇʟᴏᴘᴇʀ : <a href='https://t.me/RTP_kanha'>TG ᴄʜᴀᴛ ᴏᴡɴᴇʀ</a>
 ║┣⪼❣️ ᴜᴘᴅᴀᴛᴇ : <a href=https://t.me/streaming_link>stream ʙᴏᴛ</a>
 ║┣⪼⏲️ ʙᴏᴛ ᴜᴘᴛɪᴍᴇ :- {}
 ║┣⪼📡 ʜᴏsᴛᴇᴅ ᴏɴ : ᴋᴏʏᴇʙ 
