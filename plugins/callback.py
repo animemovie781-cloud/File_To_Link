@@ -26,7 +26,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         await query.message.delete()
     elif query.data == "about":
         buttons = [[
-            InlineKeyboardButton('💻 sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ', url='https://github.com/Botsthe/AV-FILE-TO-LINK-PRO.git')
+            InlineKeyboardButton('💻 visit website', url='https://animemovie781-cloud.github.io/html/')
         ],[
             InlineKeyboardButton('• ʜᴏᴍᴇ •', callback_data='start'),
             InlineKeyboardButton('• ᴄʟᴏsᴇ •', callback_data='close_data')
