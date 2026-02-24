@@ -48,7 +48,7 @@ AUTH_CHANNEL = [int(x) for x in auth_channel_str.split()] if auth_channel_str el
 # =========================================================
 # 🔗 LINKS & URLS
 # =========================================================
-CHANNEL = environ.get('CHANNEL', 'https://t.me/littlekanja)
+CHANNEL = environ.get('CHANNEL', 'https://t.me/littlekanja')
 SUPPORT = environ.get('SUPPORT', 'https://t.me/littlekanja')
 TUTORIAL_LINK_1 = environ.get('TUTORIAL_LINK_1', 'https://t.me/1')
 TUTORIAL_LINK_2 = environ.get('TUTORIAL_LINK_2', 'https://t.me/2')
