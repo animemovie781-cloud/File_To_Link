@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>kanha | {{ file_name }}</title>
+    <title>WATCH NOW | {{ file_name }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="https://img.sanishtech.com/u/62e636411ff87f8ccbdd9eb50eb18279.png" type="image/x-icon">
 
@@ -17,10 +17,11 @@
     <link rel="stylesheet" href="https://av-botz.vercel.app/2626/style.css">
     
     <style>
-        /* Enhanced Video Player Styles */
+        /* Video Player Wrapper */
         .player-wrapper {
             position: relative;
             width: 100%;
+            margin: 0 auto;
             background: linear-gradient(135deg, rgba(20, 20, 30, 0.9) 0%, rgba(30, 30, 50, 0.9) 100%);
             border-radius: 20px;
             overflow: hidden;
@@ -29,25 +30,12 @@
             border: 1px solid rgba(100, 200, 255, 0.2);
             backdrop-filter: blur(10px);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            animation: slideUp 0.6s ease-out;
         }
 
         .player-wrapper:hover {
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6),
                         0 0 50px rgba(100, 200, 255, 0.15);
             border-color: rgba(100, 200, 255, 0.4);
-            transform: translateY(-5px);
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .player-wrapper::before {
@@ -64,12 +52,14 @@
 
         #videoContainer {
             position: relative;
+            width: 100%;
             aspect-ratio: 16 / 9;
             overflow: hidden;
             background: #000;
+            display: block;
         }
 
-        #myVideo {
+        video {
             width: 100%;
             height: 100%;
             object-fit: contain;
@@ -81,31 +71,21 @@
             --plyr-color-main: #64c8ff;
             --plyr-progress-loading-size: 8px;
             --plyr-range-handle-transition: all 0.3s ease;
-            --plyr-tooltip-background: rgba(20, 20, 30, 0.95);
-            --plyr-tooltip-text-color: #fff;
         }
 
         .plyr__controls {
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4));
             padding: 15px 20px 20px;
         }
 
         .plyr__control {
             transition: all 0.2s ease;
             border-radius: 8px;
+            color: #fff;
         }
 
         .plyr__control:hover {
             background: rgba(100, 200, 255, 0.2);
-            transform: scale(1.1);
-        }
-
-        .plyr__control.playing:hover {
-            background: rgba(255, 100, 100, 0.2);
-        }
-
-        .plyr__progress {
-            margin-bottom: 12px;
         }
 
         .plyr__progress__container {
@@ -120,158 +100,52 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        .plyr__progress__buffer {
-            background: linear-gradient(90deg, rgba(100, 200, 255, 0.3), rgba(100, 200, 255, 0.1));
-            border-radius: 10px;
-        }
-
         .plyr__progress__played {
             background: linear-gradient(90deg, #64c8ff, #ff6b9d);
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(100, 200, 255, 0.5);
         }
 
-        .plyr__control--overlaid {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 50%;
-            backdrop-filter: blur(5px);
-            border: 2px solid rgba(100, 200, 255, 0.3);
-        }
-
-        .plyr__control--overlaid:hover {
-            background: rgba(100, 200, 255, 0.2);
-            border-color: rgba(100, 200, 255, 0.6);
-            transform: scale(1.15);
-            box-shadow: 0 0 20px rgba(100, 200, 255, 0.4);
-        }
-
-        .plyr__control--overlaid svg {
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-        }
-
-        /* Volume Control */
-        .plyr__control[aria-label*="volume"] {
-            position: relative;
-        }
-
-        .plyr__control[aria-label*="volume"]:hover::after {
-            content: '';
-            position: absolute;
-            bottom: 100%;
-            right: 0;
-            width: 100%;
-            height: 150px;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-            border-radius: 8px;
-        }
-
-        /* Fullscreen */
-        .plyr--fullscreen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 9999;
-        }
-
-        /* Quality/Settings Button */
         .plyr__menu__container {
-            background: linear-gradient(135deg, rgba(20, 20, 30, 0.95) 0%, rgba(30, 30, 50, 0.95) 100%);
+            background: rgba(20, 20, 30, 0.95);
             border-radius: 12px;
             border: 1px solid rgba(100, 200, 255, 0.2);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
         }
 
         .plyr__menu__container button {
             transition: all 0.2s ease;
-            padding: 8px 12px;
-            border-radius: 6px;
         }
 
         .plyr__menu__container button:hover {
             background: rgba(100, 200, 255, 0.15);
-            padding-left: 16px;
         }
 
-        .plyr__menu__container button[aria-checked="true"] {
-            background: linear-gradient(135deg, rgba(100, 200, 255, 0.3), rgba(255, 107, 157, 0.2));
-            color: #64c8ff;
+        .plyr__control--overlaid {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            transition: all 0.3s ease;
         }
 
-        /* Time Display */
-        .plyr__time {
-            transition: all 0.2s ease;
+        .plyr__control--overlaid:hover {
+            background: rgba(100, 200, 255, 0.3);
+            transform: scale(1.1);
         }
 
-        .plyr__time:hover {
-            color: #64c8ff;
-            text-shadow: 0 0 10px rgba(100, 200, 255, 0.5);
-        }
-
-        /* Captions */
-        .plyr__captions {
-            font-size: 16px;
-            font-weight: 500;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
-        }
-
-        /* Loading State */
-        .plyr__loading {
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 0.6;
-            }
-            50% {
-                opacity: 1;
-            }
-        }
-
-        /* Tooltip Enhancement */
-        .plyr__tooltip {
-            background: rgba(20, 20, 30, 0.95);
-            border-radius: 8px;
-            border: 1px solid rgba(100, 200, 255, 0.3);
-            padding: 8px 12px;
-            font-weight: 500;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
-        }
-
-        /* Responsive Design */
+        /* Responsive */
         @media (max-width: 768px) {
-            .plyr__controls {
-                padding: 12px 15px 15px;
-            }
-
-            .plyr__control {
-                font-size: 14px;
-            }
-
-            #videoContainer {
-                aspect-ratio: auto;
-                min-height: 250px;
-            }
-        }
-
-        @media (max-width: 480px) {
             .player-wrapper {
                 border-radius: 12px;
             }
 
-            .plyr__progress__container {
-                height: 5px;
-            }
-
             #videoContainer {
-                min-height: 200px;
+                aspect-ratio: 16 / 9;
+                min-height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #videoContainer {
+                aspect-ratio: 16 / 9;
+                min-height: 250px;
             }
         }
     </style>
@@ -284,7 +158,7 @@
     <nav class="navbar anim-entry">
         <div class="container d-flex justify-content-between align-items-center position-relative">
             <a href="#" class="navbar-brand text-decoration-none">
-                <i class="fa-solid fa-robot me-2" style="color: var(--accent-color);"></i> AV BOTZ
+                <i class="fa-solid fa-play me-2" style="color: var(--accent-color);"></i> WATCH NOW
             </a>
             
             <button id="menuToggle" class="menu-btn">
@@ -303,10 +177,9 @@
     <main class="container py-4">
 
         <div class="player-wrapper mb-4 anim-entry delay-1">
-            <div id="videoContainer">
-                <video id="myVideo" playsinline controls class="w-100 h-100">
+            <div id="videoContainer" class="plyr__video-wrapper">
+                <video id="myVideo" playsinline>
                     <source src="{{ file_url }}" type="video/mp4" />
-                    <source src="{{ file_url }}" type="video/mkv" />
                     Your browser does not support the video tag.
                 </video>
             </div>
@@ -387,7 +260,7 @@
             <i class="fa-solid fa-moon me-1"></i> 🌗 Smart Theme Enabled<br>
             <span style="font-size: 10px; opacity: 0.6;">This page automatically adjusts its theme based on your device time.</span>
         </div>
-        <p class="mb-0">🔹 Official content by kanha <br> © 2025</p>
+        <p class="mb-0">🔹 Official content by WATCH NOW <br> © 2025</p>
         <p class="text-danger mt-2" style="font-size: 0.7rem;">⚠️ Sharing or re-uploading this content without credit is strictly prohibited.</p>
     </footer>
 
@@ -426,37 +299,53 @@
     </script>
 
     <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
-    <script src="https://av-botz.vercel.app/2626/script.js"></script>
     
     <script>
-        // Initialize Plyr
-        const player = new Plyr('#myVideo', {
-            controls: [
-                'play-large',
-                'play',
-                'progress',
-                'current-time',
-                'duration',
-                'mute',
-                'volume',
-                'settings',
-                'fullscreen'
-            ],
-            quality: { default: 720, options: [360, 480, 720, 1080] },
-            speed: { selected: 1, options: [0.5, 0.75, 1, 1.25, 1.5, 2] },
-            keyboard: { focused: true, global: true },
-            tooltips: { controls: true, seek: true },
-            seekTime: 10,
-            invertTime: false,
-            displayDuration: true,
-            autoplay: false,
-            autopause: true,
-            loop: { active: false },
-            previewThumbnails: null,
-            hideControls: true,
-            resetOnEnd: false,
-            storage: { enabled: true, key: 'plyr' }
+        // Initialize Plyr when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            const player = new Plyr('#myVideo', {
+                controls: [
+                    'play-large',
+                    'play',
+                    'progress',
+                    'current-time',
+                    'duration',
+                    'mute',
+                    'volume',
+                    'settings',
+                    'fullscreen'
+                ],
+                quality: { 
+                    default: 720, 
+                    options: [360, 480, 720, 1080] 
+                },
+                speed: { 
+                    selected: 1, 
+                    options: [0.5, 0.75, 1, 1.25, 1.5, 2] 
+                },
+                keyboard: { 
+                    focused: true, 
+                    global: true 
+                },
+                tooltips: { 
+                    controls: true, 
+                    seek: true 
+                },
+                seekTime: 10,
+                displayDuration: true,
+                autoplay: false,
+                autopause: true,
+                hideControls: true,
+                storage: { 
+                    enabled: true, 
+                    key: 'plyr' 
+                }
+            });
+
+            console.log('Video player initialized');
         });
     </script>
+    
+    <script src="https://av-botz.vercel.app/2626/script.js"></script>
 </body>
-    </html>
+</html>
